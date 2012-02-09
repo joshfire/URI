@@ -3,6 +3,9 @@
  * 
  * URI Tests
  * - Test suite can be launched by running URI.Test();
+ *
+ * The fork completes the list of tests with a few regression tests
+ * for issues #1, #2 and #4.
  * 
  * @author Nathan <http://webr3.org/nathan#me>
  * @version 2010-06-22T16:55:00Z 
@@ -123,4 +126,24 @@ if( typeof require != 'undefined' ) {
 	assert.equal( test.resolveReference('g?y/../x') , 'http://a/b/c/g?y/../x', message );
 	assert.equal( test.resolveReference('g#s/./x') , 'http://a/b/c/g#s/./x', message );
 	assert.equal( test.resolveReference('g#s/../x') , 'http://a/b/c/g#s/../x', message );
+
+	// Regression tests for resolution issues (issue #1 and issue #4)
+	test = new URI('http://a/b');
+	assert.equal( test.resolveReference('g:h') , 'g:h', message );
+	assert.equal( test.resolveReference('g') , 'http://a/g', message );
+	assert.equal( test.resolveReference('./g') , 'http://a/g', message );
+	assert.equal( test.resolveReference('g/') , 'http://a/g/', message );
+	assert.equal( test.resolveReference('/g') , 'http://a/g', message );
+	assert.equal( test.resolveReference('//g') , 'http://g', message );
+	assert.equal( test.resolveReference('?y') , 'http://a/b?y', message );
+	assert.equal( test.resolveReference('g?y') , 'http://a/g?y', message );
+	assert.equal( test.resolveReference('#s') , 'http://a/b#s', message );
+	assert.equal( test.resolveReference('g#s') , 'http://a/g#s', message );
+	assert.equal( test.resolveReference('g?y#s') , 'http://a/g?y#s', message );
+	assert.equal( test.resolveReference(';x') , 'http://a/;x', message );
+	assert.equal( test.resolveReference('g;x') , 'http://a/g;x', message );
+	assert.equal( test.resolveReference('g;x?y#s') , 'http://a/g;x?y#s', message );
+	assert.equal( test.resolveReference('') , 'http://a/b', message );
+	assert.equal( test.resolveReference('.') , 'http://a/', message );
+	assert.equal( test.resolveReference('./') , 'http://a/', message );
 })();

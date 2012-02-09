@@ -5,7 +5,12 @@ URI Type for javascript
  - All classes extend the native String implementation.
  - Pure ECMA-262 implementation of URI spec (RFC-3986)
  - Works Client or Server side, (V8 / node.js compatible).
- 
+
+This version is a fork of the original URI project at:
+ https://github.com/webr3/URI
+
+This fork fixes issues #1, #2 and #4 described at:
+ https://github.com/webr3/URI/issues
 
 Usage:
  
