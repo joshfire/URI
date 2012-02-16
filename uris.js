@@ -378,16 +378,16 @@
 // Export URI using similar export mechanism as in underscore.js.
 // Compatible with node.js, CommonJS.
 // Add 'URI' to the global object if not in a module environment.
-if (typeof exports !== 'undefined') {
+if (typeof define === 'function' && define.amd) {
+  // Register as a named module with AMD.
+  define('uri', function() {
+    return URI;
+  });
+} else if (typeof exports !== 'undefined') {
   if (typeof module !== 'undefined' && module.exports) {
     exports = module.exports = URI;
   }
   exports.URI = URI;
-} else if (typeof define === 'function' && define.amd) {
-  // Register as a named module with AMD.
-  define('URI', function() {
-    return URI;
-  });
 } else {
   // Exported as a string, for Closure Compiler "advanced" mode.
   root['URI'] = URI;
