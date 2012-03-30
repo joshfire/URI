@@ -28,6 +28,7 @@
 (function () {
   // Establish the root object, `window` in the browser, or `global` on the server.
   var root = this;
+  var URI = null;
 
 /**
  * URI Class
@@ -379,8 +380,8 @@
 // Compatible with node.js, CommonJS.
 // Add 'URI' to the global object if not in a module environment.
 if (typeof define === 'function' && define.amd) {
-  // Register as a named module with AMD.
-  define('uri', function() {
+  // Register as a module with AMD.
+  define([], function() {
     return URI;
   });
 } else if (typeof exports !== 'undefined') {
